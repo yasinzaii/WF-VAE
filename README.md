@@ -89,7 +89,7 @@ conda activate wfvae
 pip install -r requirements.txt
 ```
 
-# Reconstructing Video or Image
+# 🤖 Reconstructing Video or Image
 
 To reconstruct a video or an image, execute the following commands:
 
