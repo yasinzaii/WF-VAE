@@ -16,7 +16,7 @@
 
 </h5>
 
-<details open><summary>💡 I also have other video-language projects that may interest you ✨. </summary><p>
+<details open><summary>💡 I also have other projects that may interest you ✨. </summary><p>
 <!--  may -->
 
 > [**Open-Sora-Plan**](https://github.com/PKU-YuanGroup/Open-Sora-Plan) <br>
