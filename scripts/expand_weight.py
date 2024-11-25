@@ -5,8 +5,8 @@ sys.path.append(".")
 from causalvideovae.model.vae.modeling_causalvae import CausalVAEModel
 from causalvideovae.model.modules import *
 
-origin_path = "/remote-home1/lzj/causal-video-vae-github/results/test"
-output_path = "models/latent8_3d"
+origin_path = ""
+output_path = ""
 
 print("Loading model!")
 model = CausalVAEModel.from_pretrained(origin_path)
