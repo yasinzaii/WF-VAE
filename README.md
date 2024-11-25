@@ -26,7 +26,7 @@
 
 # 📰 News
 
-* **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the corresponding training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
+* **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
 
 # 😮 Highlights
 
