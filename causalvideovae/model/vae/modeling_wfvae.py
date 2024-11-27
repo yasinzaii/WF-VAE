@@ -329,7 +329,7 @@ class WFVAEModel(VideoBaseAE):
         self.use_tiling = False
         # Hardcode for now
         self.t_chunk_enc = 16
-        self.t_chunk_dec = 2
+        self.t_chunk_dec = 4
         self.use_quant_layer = False
 
         self.encoder = Encoder(
