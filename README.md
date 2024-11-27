@@ -77,6 +77,8 @@ WF-VAE utilizes a multi-level wavelet transform to construct an efficient energy
 
 ## Efficiency
 
+We conduct efficiency tests at 33-frame videos using float32 precision on an H100 GPU. All models operated without block-wise inference strategies. Our model demonstrated performance comparable to state-of-the-art VAEs while **significantly reducing encoding costs**.
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/53f74160-81f0-486e-b294-10dbb5bed8e5" style="max-width: 80%;">
 </div>
