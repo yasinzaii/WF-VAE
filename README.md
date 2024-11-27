@@ -9,7 +9,7 @@
 <h5 align="center">
     
 [![hf](https://img.shields.io/badge/🤗-Hugging%20Face-blue.svg)](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn)
-[![arXiv](https://img.shields.io/badge/Arxiv-2411.17459-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2411.17459)
+<!-- [![arXiv](https://img.shields.io/badge/Arxiv-2411.17459-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2411.17459) -->
 [![License](https://img.shields.io/badge/Code%20License-Apache2.0-yellow)](https://github.com/PKU-YuanGroup/WF-VAE/blob/main/LICENSE)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FPKU-YuanGroup%2FWF-VAE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FPKU-YuanGroup%2FWF-VAE&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
 [![GitHub repo stars](https://img.shields.io/github/stars/PKU-YuanGroup/WF-VAE?style=flat&logo=github&logoColor=whitesmoke&label=Stars)](https://github.com/PKU-YuanGroup/WF-VAE/stargazers)
@@ -26,6 +26,8 @@
 
 # 📰 News
 
+
+* **[2024.11.25]**  🔥🔥🔥  We have published our [report](assets/report.pdf), which provides comprehensive training details and includes additional experiments. 
 * **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
 
 # 😮 Highlights
