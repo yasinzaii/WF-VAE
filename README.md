@@ -135,6 +135,22 @@ The training & validating instruction is in [TRAIN_AND_VALIDATE.md](TRAIN_AND_VA
 - CogVideoX - https://github.com/THUDM/CogVideo
 - Stable Diffusion - https://github.com/CompVis/stable-diffusion
 
+# ✏️ Citation
+
+If you find our paper and code useful in your research, please consider giving a star ⭐ and citation 📝.
+
+```
+@misc{li2024wfvaeenhancingvideovae,
+      title={WF-VAE: Enhancing Video VAE by Wavelet-Driven Energy Flow for Latent Video Diffusion Model}, 
+      author={Zongjian Li and Bin Lin and Yang Ye and Liuhan Chen and Xinhua Cheng and Shenghai Yuan and Li Yuan},
+      year={2024},
+      eprint={2411.17459},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.17459}, 
+}
+```
+
 # 🔒 License
 
 This project is released under the Apache 2.0 license as found in the [LICENSE](LICENSE) file.
