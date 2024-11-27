@@ -28,7 +28,7 @@ class DiagonalGaussianDistribution(object):
                 return 0.5 * torch.sum(
                     torch.pow(self.mean - other.mean, 2) / other.var
                     + self.var / other.var - 1.0 - self.logvar + other.logvar,
-                    dim=list(self.mean.shape)[1:])
+                    dim=list(range(self.mean.ndim))[1:])
 
     def nll(self, sample, dims=[1,2,3]):
         if self.deterministic:
@@ -36,7 +36,7 @@ class DiagonalGaussianDistribution(object):
         logtwopi = np.log(2.0 * np.pi)
         return 0.5 * torch.sum(
             logtwopi + self.logvar + torch.pow(sample - self.mean, 2) / self.var,
-            dim=dims)
+            dim=list(range(self.mean.ndim))[1:])
 
     def mode(self):
         return self.mean
