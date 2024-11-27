@@ -51,7 +51,6 @@ def trans(x):
     return x
 
 def calculate_fvd(videos1, videos2, device, i3d, method='styleganv'):
-    print(method)
     if method == 'styleganv':
         from .fvd.styleganv.fvd import get_fvd_feats, frechet_distance, load_i3d_pretrained
     elif method == 'videogpt':
@@ -60,14 +59,8 @@ def calculate_fvd(videos1, videos2, device, i3d, method='styleganv'):
         from .fvd.videogpt.fvd import frechet_distance
 
     # videos [batch_size, timestamps, channel, h, w]
-    
     assert videos1.shape == videos2.shape
     fvd_results = []
-
-    # support grayscale input, if grayscale -> channel*3
-    # BTCHW -> BCTHW
-    # videos -> [batch_size, channel, timestamps, h, w]
-
     videos1 = trans(videos1)
     videos2 = trans(videos2)
     

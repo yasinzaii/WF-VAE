@@ -1,11 +1,11 @@
 CUDA_VISIBLE_DEVICES=1 python scripts/recon_single_video.py \
     --model_name WFVAE \
-    --from_pretrained "results/WF-VAE-L-16Chn" \
+    --from_pretrained "/storage/lcm/WF-VAE/results/Middle888" \
     --video_path /storage/lcm/WF-VAE/testvideo/gm1190263332-337350271.mp4 \
     --rec_path rec_tile.mp4 \
     --device cuda \
     --sample_rate 1 \
-    --num_frames 65 \
+    --num_frames 89 \
     --height 512 \
     --width 512 \
     --fps 30 \

@@ -1,16 +1,16 @@
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-REAL_DATASET_DIR=/storage/dataset/vae_eval/panda70m
-EXP_NAME=release-panda70m
+REAL_DATASET_DIR=/storage/dataset/vae_eval/testvideo
+EXP_NAME=release-test
 SAMPLE_RATE=1
 NUM_FRAMES=33
-RESOLUTION=256
-CKPT=results/wfvae-16dim-L-release
+RESOLUTION=288
+CKPT=/storage/lcm/WF-VAE/results/Middle888
 SUBSET_SIZE=0
 
 accelerate launch \
     --config_file examples/accelerate_configs/default_config.yaml \
     scripts/recon_video.py \
-    --batch_size 4 \
+    --batch_size 1 \
     --real_video_dir ${REAL_DATASET_DIR} \
     --generated_video_dir video_gen/${EXP_NAME}_sr${SAMPLE_RATE}_nf${NUM_FRAMES}_res${RESOLUTION}_subset${SUBSET_SIZE} \
     --device cuda \
@@ -22,5 +22,5 @@ accelerate launch \
     --num_workers 8 \
     --from_pretrained ${CKPT} \
     --model_name WFVAE \
-    --output_origin \
-    --crop_size ${RESOLUTION}
+    # --output_origin \
+    # --crop_size ${RESOLUTION}

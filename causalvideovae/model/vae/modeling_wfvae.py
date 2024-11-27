@@ -328,10 +328,8 @@ class WFVAEModel(VideoBaseAE):
         super().__init__()
         self.use_tiling = False
         # Hardcode for now
-        self.t_chunk_enc = 8
+        self.t_chunk_enc = 16
         self.t_chunk_dec = 2
-        
-        self.t_upsample_times = 4 // 2
         self.use_quant_layer = False
 
         self.encoder = Encoder(
@@ -366,8 +364,15 @@ class WFVAEModel(VideoBaseAE):
         )
 
         # Set cache offset for trilinear lossless upsample.
-        self._set_cache_offset([self.decoder.up2, self.decoder.connect_l2, self.decoder.conv_in, self.decoder.mid], 1)
-        self._set_cache_offset([self.decoder.up2[-2:], self.decoder.up1, self.decoder.connect_l1, self.decoder.layer], self.t_upsample_times)
+        if l1_dowmsample_block == "Downsample":
+            self.temporal_uptimes = 4
+            self._set_cache_offset([self.decoder.up2, self.decoder.connect_l2, self.decoder.conv_in, self.decoder.mid], 1)
+            self._set_cache_offset([self.decoder.up2[-2:], self.decoder.up1, self.decoder.connect_l1, self.decoder.layer], 2)
+        else:
+            self.temporal_uptimes = 8
+            self._set_cache_offset([self.decoder.up2, self.decoder.connect_l2, self.decoder.conv_in, self.decoder.mid], 1)
+            self._set_cache_offset([self.decoder.up2[-2:], self.decoder.connect_l1, self.decoder.up1], 2)
+            self._set_cache_offset([self.decoder.up1[-2:], self.decoder.layer], 4)
         
     def get_encoder(self):
         if self.use_quant_layer:
@@ -427,7 +432,6 @@ class WFVAEModel(VideoBaseAE):
         posterior = DiagonalGaussianDistribution(h)
         return AutoencoderKLOutput(latent_dist=posterior, extra_output=(l1, l2))
     
-    
     def tile_encode(self, x):
         b, c, t, h, w = x.shape
         
@@ -477,7 +481,7 @@ class WFVAEModel(VideoBaseAE):
             chunk = self.decoder(chunk)[0]
             
             if end + 1 < t:
-                chunk = chunk[:, :, :-4]
+                chunk = chunk[:, :, :-self.temporal_uptimes]
                 result.append(chunk.clone())
             else:
                 result.append(chunk.clone())
