@@ -28,7 +28,6 @@ def main(args: argparse.Namespace):
     generated_video_dir = args.generated_video_dir
     sample_rate = args.sample_rate
     resolution = args.resolution
-    crop_size = args.crop_size
     num_frames = args.num_frames
     sample_rate = args.sample_rate
     device = args.device
@@ -36,6 +35,8 @@ def main(args: argparse.Namespace):
     batch_size = args.batch_size
     num_workers = args.num_workers
     subset_size = args.subset_size
+    crop_size_width = args.crop_size_width
+    crop_size_height = args.crop_size_height
     
     if not os.path.exists(args.generated_video_dir):
         os.makedirs(args.generated_video_dir, exist_ok=True)
@@ -55,7 +56,8 @@ def main(args: argparse.Namespace):
         real_video_dir=real_video_dir,
         num_frames=num_frames,
         sample_rate=sample_rate,
-        crop_size=crop_size,
+        crop_size_width=crop_size_width,
+        crop_size_height=crop_size_height,
         resolution=resolution,
     )
     if subset_size:
@@ -89,8 +91,17 @@ def main(args: argparse.Namespace):
             energy_list[i].append(calculate_energy(coeffs[:, start_pos:end_pos]).item())
             entropy_list[i].append(calculate_entropy(coeffs[:, start_pos:end_pos]).item())
         
-        encode_result = vae.encode(x).latent_dist.sample()
-        video_recon = vae.decode(encode_result).sample
+        encode_result = vae.encode(x)
+        if isinstance(encode_result, tuple):
+            encode_result = encode_result[0]
+        if hasattr(encode_result, "mode"):
+            latents = encode_result.mode().to(data_type)
+        else:
+            latents = encode_result.to(data_type)
+        video_recon = vae.decode(latents)
+        if isinstance(video_recon, tuple):
+            video_recon = video_recon[0]
+        print(x.shape, latents.shape, video_recon.shape)
         
         for idx, video in enumerate(video_recon):
             output_path = os.path.join(generated_video_dir, file_names[idx])
@@ -104,6 +115,7 @@ def main(args: argparse.Namespace):
                 video, fps=sample_fps / sample_rate, output_file=output_path
             )
     
+    # Gather for save
     for i in range(8):
         energy_list[i] = accelerator.gather_for_metrics(energy_list[i])
         entropy_list[i] = accelerator.gather_for_metrics(entropy_list[i])
@@ -122,7 +134,8 @@ if __name__ == "__main__":
     parser.add_argument("--from_pretrained", type=str, default="")
     parser.add_argument("--sample_fps", type=int, default=30)
     parser.add_argument("--resolution", type=int, default=336)
-    parser.add_argument("--crop_size", type=int, default=None)
+    parser.add_argument("--crop_size_width", type=int, default=None)
+    parser.add_argument("--crop_size_height", type=int, default=None)
     parser.add_argument("--num_frames", type=int, default=17)
     parser.add_argument("--sample_rate", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=1)

@@ -160,6 +160,7 @@ def resize(x, resolution):
     resized_x = F.interpolate(x, size=(new_height, new_width), mode='bilinear', align_corners=True, antialias=True)
     return resized_x
 
+
 class ValidVideoDataset(data.Dataset):
     video_exts = ["avi", "mp4", "webm"]
     
@@ -168,6 +169,8 @@ class ValidVideoDataset(data.Dataset):
         real_video_dir,
         num_frames,
         sample_rate=1,
+        crop_size_width=None,
+        crop_size_height=None,
         crop_size=None,
         resolution=128,
         is_main_process=False
@@ -178,14 +181,21 @@ class ValidVideoDataset(data.Dataset):
         
         self.num_frames = num_frames
         self.sample_rate = sample_rate
-        self.crop_size = crop_size
+        
+        if crop_size is not None:
+            self.crop_size_width = crop_size
+            self.crop_size_height = crop_size
+        else:
+            self.crop_size_width = crop_size_width
+            self.crop_size_height = crop_size_height
+            
         self.short_size = resolution
         self.v_decoder = DecordInit()
         self.transform = Compose(
             [
                 ToTensorVideo(),
                 Resize(resolution),
-                CenterCropVideo(crop_size) if crop_size is not None else Lambda(lambda x: x),
+                CenterCropVideo((self.crop_size_height, self.crop_size_width)) if self.crop_size_width is not None and self.crop_size_height is not None else Lambda(lambda x: x),
             ]
         )
         
@@ -205,8 +215,11 @@ class ValidVideoDataset(data.Dataset):
                 [],
             )
             if self.is_main_process:
-                with open(cache_file, "wb") as f:
-                    pickle.dump(samples, f)
+                try:
+                    with open(cache_file, "wb") as f:
+                        pickle.dump(samples, f)
+                except Exception as e:
+                    print(f"Error with {e}, {cache_file}")
         return samples
     
     def __len__(self):
@@ -222,6 +235,8 @@ class ValidVideoDataset(data.Dataset):
             video_name = os.path.basename(real_video_file)
             return {'video': real_video_tensor, 'file_name': video_name }
         except:
+            import traceback
+            traceback.print_exc()
             print(f"Video error: {self.real_video_files[index]}")
             return self.__getitem__(0)
 
