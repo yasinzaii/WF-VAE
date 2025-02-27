@@ -27,7 +27,7 @@
 
 # 📰 News
 
-* **[2025.02.27]** 🔥🔥🔥 WF-VAE has been accepted by CVPR 2025, and we will update arXiv with more details soon, keep tuned! We add a more standardized code in `causalvideovae/model/vae/modeling_wfvae2.py`.
+* **[2025.02.27]** 🔥🔥🔥 WF-VAE has been accepted by **CVPR 2025**, and we will update arXiv with more details soon, keep tuned! We add a more standardized code in `causalvideovae/model/vae/modeling_wfvae2.py`.
 * **[2024.11.27]**  🔥🔥🔥  We have published our [report](assets/report.pdf), which provides comprehensive training details and includes additional experiments. 
 * **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
 
