@@ -30,6 +30,7 @@
 * **[2025.02.27]** 🔥🔥🔥 WF-VAE has been accepted by **CVPR 2025**, and we will update arXiv with more details soon, keep tuned! We add a more standardized code in `causalvideovae/model/vae/modeling_wfvae2.py`.
 * **[2024.11.27]**  🔥🔥🔥  We have published our [report](assets/report.pdf), which provides comprehensive training details and includes additional experiments. 
 * **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
+* **[2024.10.16]**  We have released the 8-channel WF-VAE-S on the Open-Sora Plan repository. Its latent space is distilled from OD-VAE. Since this version is distilled, we do not recommend using it to train video generation models.
 
 # 😮 Highlights
 
@@ -146,29 +147,28 @@ Some pretrained results of video generation model using WF-VAE:
   <tbody>
     <tr>
       <td>
-        https://github.com/user-attachments/assets/7a5015d4-cbc6-475d-a251-9aa14ff49b22
+        <video src="https://github.com/user-attachments/assets/7a5015d4-cbc6-475d-a251-9aa14ff49b22" autoplay controls></video>
       </td>
       <td>
-        https://github.com/user-attachments/assets/16718c4a-59cd-4eda-917f-7ccf17c0ad22
+        <video src="https://github.com/user-attachments/assets/16718c4a-59cd-4eda-917f-7ccf17c0ad22" autoplay controls></video>
       </td>
       <td>
-        https://github.com/user-attachments/assets/1504ac8d-1c72-47dd-80c9-65f6e39fa939
+        <video src="https://github.com/user-attachments/assets/1504ac8d-1c72-47dd-80c9-65f6e39fa939" autoplay controls></video>
       </td>
     </tr>
-      <tr>
+    <tr>
       <td>
-        https://github.com/user-attachments/assets/15d20f71-88ff-4b48-85d1-3fb063d1af94
+        <video src="https://github.com/user-attachments/assets/15d20f71-88ff-4b48-85d1-3fb063d1af94" autoplay controls></video>
       </td>
       <td>
-        https://github.com/user-attachments/assets/ce0d3620-d40a-4289-9b12-549936f2dee5
+        <video src="https://github.com/user-attachments/assets/ce0d3620-d40a-4289-9b12-549936f2dee5" autoplay controls></video>
       </td>
       <td>
-        https://github.com/user-attachments/assets/701e40f4-7ce9-4298-be28-5cd2ab1ad2c7
+        <video src="https://github.com/user-attachments/assets/701e40f4-7ce9-4298-be28-5cd2ab1ad2c7" autoplay controls></video>
       </td>
     </tr>
   </tbody>
 </table>
-
 
 # ✏️ Citation
 
