@@ -77,6 +77,35 @@ WF-VAE utilizes a multi-level wavelet transform to construct an efficient energy
 </table>
 
 
+Some pretrained results of video generation model using WF-VAE:
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <video src="https://github.com/user-attachments/assets/7a5015d4-cbc6-475d-a251-9aa14ff49b20" autoplay controls></video>
+      </td>
+      <td>
+        <video src="https://github.com/user-attachments/assets/16718c4a-59cd-4eda-917f-7ccf17c0ad22" autoplay controls></video>
+      </td>
+      <td>
+        <video src="https://github.com/user-attachments/assets/1504ac8d-1c72-47dd-80c9-65f6e39fa939" autoplay controls></video>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <video src="https://github.com/user-attachments/assets/15d20f71-88ff-4b48-85d1-3fb063d1af94" autoplay controls></video>
+      </td>
+      <td>
+        <video src="https://github.com/user-attachments/assets/ce0d3620-d40a-4289-9b12-549936f2dee5" autoplay controls></video>
+      </td>
+      <td>
+        <video src="https://github.com/user-attachments/assets/701e40f4-7ce9-4298-be28-5cd2ab1ad2c7" autoplay controls></video>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Efficiency
 
 We conduct efficiency tests at 33-frame videos using float32 precision on an H100 GPU. All models operated without block-wise inference strategies. Our model demonstrated performance comparable to state-of-the-art VAEs while **significantly reducing encoding costs**.
@@ -140,35 +169,6 @@ The training & validating instruction is in [TRAIN_AND_VALIDATE.md](TRAIN_AND_VA
 - Allegro - https://github.com/rhymes-ai/Allegro
 - CogVideoX - https://github.com/THUDM/CogVideo
 - Stable Diffusion - https://github.com/CompVis/stable-diffusion
-
-Some pretrained results of video generation model using WF-VAE:
-
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <video src="https://github.com/user-attachments/assets/7a5015d4-cbc6-475d-a251-9aa14ff49b22" autoplay controls></video>
-      </td>
-      <td>
-        <video src="https://github.com/user-attachments/assets/16718c4a-59cd-4eda-917f-7ccf17c0ad22" autoplay controls></video>
-      </td>
-      <td>
-        <video src="https://github.com/user-attachments/assets/1504ac8d-1c72-47dd-80c9-65f6e39fa939" autoplay controls></video>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <video src="https://github.com/user-attachments/assets/15d20f71-88ff-4b48-85d1-3fb063d1af94" autoplay controls></video>
-      </td>
-      <td>
-        <video src="https://github.com/user-attachments/assets/ce0d3620-d40a-4289-9b12-549936f2dee5" autoplay controls></video>
-      </td>
-      <td>
-        <video src="https://github.com/user-attachments/assets/701e40f4-7ce9-4298-be28-5cd2ab1ad2c7" autoplay controls></video>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 # ✏️ Citation
 
