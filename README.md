@@ -78,7 +78,7 @@ WF-VAE utilizes a multi-level wavelet transform to construct an efficient energy
 
 ## Generation
 
-We used WF-VAE to pretrain on flow model, achieving good generation results.
+We use WF-VAE to pretrain on flow model, achieving good generation results.
 
 <table>
   <tbody>
