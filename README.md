@@ -29,8 +29,8 @@
 
 * **[2025.02.27]** 🔥🔥🔥 WF-VAE has been accepted by **CVPR 2025**, and we will update arXiv with more details soon, keep tuned! We add a more standardized code in `causalvideovae/model/vae/modeling_wfvae2.py`.
 * **[2024.11.27]**  🔥🔥🔥  We have published our [report](assets/report.pdf), which provides comprehensive training details and includes additional experiments. 
-* **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
-* **[2024.10.16]**  We have released the 8-channel WF-VAE-S on the Open-Sora Plan repository. Its latent space is distilled from OD-VAE. Since this version is distilled, we do not recommend using it to train video generation models.
+* **[2024.11.25]**  🔥🔥🔥 We have released our 16-channel WF-VAE-L **(316M)** model along with the training code.  Welcome to download it from [Huggingface](https://huggingface.co/chestnutlzj/WF-VAE-L-16Chn).
+* **[2024.10.16]**  We have released the **8-channel WF-VAE-S** on Open-Sora Plan v1.3. It is important to emphasize that this version is a distilled form of OD-VAE, so its use is not recommended.
 
 # 😮 Highlights
 
