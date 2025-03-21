@@ -118,6 +118,8 @@ pip install -r requirements.txt
 
 # 🤖 Reconstructing Video or Image
 
+> Warning: Issue #9. Using tiling at specific frames can result in arifacts.
+
 To reconstruct a video or an image, execute the following commands:
 
 ## Video Reconstruction
