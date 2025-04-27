@@ -546,7 +546,7 @@ class WFVAEModel(VideoBaseAE):
     def decode(self, z):
         self._empty_causal_cached(self.decoder)
         self._set_first_chunk(True)
-
+        
         if self.use_tiling:
             dec = self.tile_decode(z)
             l1, l2 = None, None
@@ -558,15 +558,25 @@ class WFVAEModel(VideoBaseAE):
         return DecoderOutput(sample=dec, extra_output=(l1, l2))
 
     def tile_decode(self, x):
-        b, c, t, h, w = x.shape
-
-        start_end = self.build_chunk_start_end(t, decoder_mode=True)
+        b, c, t_latent, h, w = x.shape
+        
+        t_upsampled = (t_latent - 1) * self.temporal_uptimes + 1
+        if self.temporal_size is None:
+            self.temporal_size = t_upsampled
+            self._auto_select_t_chunk()
+        
+        if self.temporal_size and self.temporal_size != t_upsampled:
+            raise ValueError(
+                "Input temporal size is not consistent with the temporal size of the model."
+            )
+        
+        start_end = self.build_chunk_start_end(t_latent, decoder_mode=True)
 
         result = []
         for idx, (start, end) in enumerate(start_end):
             self._set_first_chunk(idx == 0)
 
-            if end + 1 < t:
+            if end + 1 < t_latent:
                 chunk = x[:, :, start : end + 1, :, :]
             else:
                 chunk = x[:, :, start:end, :, :]
@@ -575,7 +585,7 @@ class WFVAEModel(VideoBaseAE):
                 chunk = self.post_quant_conv(chunk)
             chunk = self.decoder(chunk)[0]
 
-            if end + 1 < t:
+            if end + 1 < t_latent:
                 chunk = chunk[:, :, : -self.temporal_uptimes]
                 result.append(chunk.clone())
             else:
