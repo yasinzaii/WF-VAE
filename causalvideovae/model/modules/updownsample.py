@@ -9,7 +9,7 @@ from collections import deque
 
 
 class Upsample(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels, out_channels, **kwargs):
         super().__init__()
         self.with_conv = True
         if self.with_conv:
@@ -26,7 +26,7 @@ class Upsample(nn.Module):
 
 
 class Downsample(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels, out_channels, **kwargs):
         super().__init__()
         self.with_conv = True
         if self.with_conv:
