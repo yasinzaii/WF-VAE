@@ -19,3 +19,6 @@ experiments/
 backup
 *.ipynb
 easy_run.py
+vae888/
+tests/
+check.py

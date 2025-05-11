@@ -103,7 +103,6 @@ def main(args: argparse.Namespace):
             args.height,
             args.width,
         )
-        print("input shape", x_vae.shape)
         x_vae = x_vae.to(device, dtype=data_type)
 
         # Encode the video into latent space

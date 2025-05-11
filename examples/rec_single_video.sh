@@ -1,7 +1,7 @@
 CUDA_VISIBLE_DEVICES=1 python scripts/recon_single_video.py \
     --model_name WFVAE \
-    --from_pretrained "/mnt/data/datasets/chestnutlzj/WF-VAE-L-16Chn" \
-    --video_path /mnt/data/multi-face/data/sucai/canva/step3_canva_highReso_video/step3_canva_highReso_videos/VAD-42MoM8M.mp4 \
+    --from_pretrained "/mnt/data/lzj/codes/WF-VAE/vae888" \
+    --video_path /mnt/data/multi-face/data/sucai/istock/videos_istock_coco_part7/gm1211844241-351588364.mp4 \
     --rec_path rec_tile.mp4 \
     --device cuda \
     --sample_rate 1 \

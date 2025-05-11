@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 import torch
 import torch.nn as nn
 import os
@@ -183,6 +183,7 @@ class Decoder(VideoBaseAE):
                 norm_type=norm_type,
             ),
         ]
+        
         if use_attention:
             mid_layers.insert(
                 1,
@@ -193,6 +194,7 @@ class Decoder(VideoBaseAE):
 
         self.mid = nn.Sequential(*mid_layers)
 
+        upsample_depth = 0
         self.up2 = nn.Sequential(
             *[
                 ResnetBlock3D(
@@ -204,7 +206,7 @@ class Decoder(VideoBaseAE):
                 for _ in range(num_resblocks)
             ],
             resolve_str_to_obj(l2_upsample_block)(
-                base_channels * 4, base_channels * 4, t_interpolation=t_interpolation
+                base_channels * 4, base_channels * 4, t_interpolation=t_interpolation, depth=upsample_depth
             ),
             ResnetBlock3D(
                 in_channels=base_channels * 4,
@@ -213,6 +215,8 @@ class Decoder(VideoBaseAE):
                 norm_type=norm_type,
             ),
         )
+        upsample_depth += 1
+        
         self.up1 = nn.Sequential(
             *[
                 ResnetBlock3D(
@@ -224,7 +228,7 @@ class Decoder(VideoBaseAE):
                 for i in range(num_resblocks)
             ],
             resolve_str_to_obj(l1_upsample_block)(
-                in_channels=base_channels * 2, out_channels=base_channels * 2
+                in_channels=base_channels * 2, out_channels=base_channels * 2, t_interpolation=t_interpolation, depth=upsample_depth
             ),
             ResnetBlock3D(
                 in_channels=base_channels * 2,
@@ -233,6 +237,7 @@ class Decoder(VideoBaseAE):
                 norm_type=norm_type,
             ),
         )
+        
         self.layer = nn.Sequential(
             *[
                 ResnetBlock3D(
@@ -563,6 +568,7 @@ class WFVAEModel(VideoBaseAE):
         t_upsampled = (t_latent - 1) * self.temporal_uptimes + 1
         if self.temporal_size is None:
             self.temporal_size = t_upsampled
+            # self.t_chunk_dec = 4
             self._auto_select_t_chunk()
         
         if self.temporal_size and self.temporal_size != t_upsampled:
@@ -571,13 +577,13 @@ class WFVAEModel(VideoBaseAE):
             )
         
         start_end = self.build_chunk_start_end(t_latent, decoder_mode=True)
-
+        
         result = []
         for idx, (start, end) in enumerate(start_end):
             self._set_first_chunk(idx == 0)
 
-            if end + 1 < t_latent:
-                chunk = x[:, :, start : end + 1, :, :]
+            if idx != 0 and end + 1 < t_latent:
+                chunk: Any = x[:, :, start : end + 1, :, :]
             else:
                 chunk = x[:, :, start:end, :, :]
 
