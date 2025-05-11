@@ -590,13 +590,15 @@ class WFVAEModel(VideoBaseAE):
             if self.use_quant_layer:
                 chunk = self.post_quant_conv(chunk)
             chunk = self.decoder(chunk)[0]
-
-            if end + 1 < t_latent:
+            if idx != 0 and end + 1 < t_latent:
                 chunk = chunk[:, :, : -self.temporal_uptimes]
                 result.append(chunk.clone())
             else:
                 result.append(chunk.clone())
 
+        for chunk in result:
+            print(chunk.shape)
+            
         return torch.cat(result, dim=2)
 
     def forward(self, input, sample_posterior=True):
