@@ -77,7 +77,7 @@ class HaarWaveletTransform3D(nn.Module):
             outputs.append(self.gh_v_conv(y))
         
         outputs = torch.cat(outputs, dim=0)
-        outputs = rearrange(outputs, "(b k c) 1 t h w -> b (c k) t h w", b=b, k=c)
+        outputs = rearrange(outputs, "(b k c) 1 t h w -> b (c k) t h w", b=b, c=c, k=8)
         return outputs
     
 class InverseHaarWaveletTransform3D(nn.Module):
