@@ -5,9 +5,6 @@ from ..modules import CausalConv3d
 from ..modules.ops import video_to_image
 
 from einops import rearrange
-
-def conv():
-            return nn.Conv3d(1, 1, kernel_size=2, stride=2, padding=0, bias=False)
         
 class HaarWaveletTransform3D(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
