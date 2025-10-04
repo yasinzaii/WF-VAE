@@ -6,6 +6,9 @@ from ..modules.ops import video_to_image
 
 from einops import rearrange
 
+def conv():
+            return nn.Conv3d(1, 1, kernel_size=2, stride=2, padding=0, bias=False)
+        
 class HaarWaveletTransform3D(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -77,7 +80,7 @@ class HaarWaveletTransform3D(nn.Module):
             outputs.append(self.gh_v_conv(y))
         
         outputs = torch.cat(outputs, dim=0)
-        outputs = rearrange(outputs, "(b k c) 1 t h w -> b (c k) t h w", b=b, c=c, k=8)
+        outputs = rearrange(outputs, "(b c k) 1 t h w -> b (k c) t h w", b=b, c=c, k=8)
         return outputs
     
 class InverseHaarWaveletTransform3D(nn.Module):
